@@ -1,0 +1,77 @@
+header.information {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+
+    .info {
+        display: flex;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .icons {
+        display: flex;
+
+        &__add-room {
+            border-radius: 50%;
+            background: var(--color-primary-background);
+            outline: none;
+            border: none;
+            padding: 4px 6px;
+            & svg:hover {
+                color: white;
+            }
+            &.light {
+                color: #000;
+            }
+            &.light,
+            &.light:hover {
+                color: white;
+            }
+        }
+    }
+
+    i,
+    button {
+        padding: 8px;
+        cursor: pointer;
+        & > :hover {
+            transition: color 0.4s linear;
+            color: var(--color-primary-background);
+        }
+    }
+
+    .create-room {
+        margin: 0 auto;
+    }
+
+    .profile {
+        display: flex;
+        justify-content: flex-start;
+        margin-left: 12px;
+        align-items: center;
+        gap: 16px;
+        flex: 1;
+
+        &__image {
+            width: 50px;
+            height: 50px;
+
+            & > img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        &__name {
+            font-size: 1.6rem;
+            font-weight: 300;
+            h4 {
+                font-size: inherit;
+                font-weight: inherit;
+            }
+        }
+    }
+}

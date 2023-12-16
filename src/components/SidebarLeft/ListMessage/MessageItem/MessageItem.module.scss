@@ -1,0 +1,58 @@
+.message-item {
+    display: flex;
+    gap: 4px;
+    max-height: 60px;
+
+    &__avatar {
+        width: 52px;
+        height: 52px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        & > img {
+            width: 32px;
+            height: 32px;
+        }
+    }
+
+    &__info-name__info-latest-message,
+    &__info-timing-message__info-notification {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+        height: 52px;
+    }
+
+    &__info-name__info-latest-message {
+        flex: 1;
+        font-size: 1.4rem;
+        cursor: pointer;
+        .watched {
+            font-size: 1.4rem;
+        }
+    }
+
+    &__info-name {
+    }
+
+    &__info-latest-message {
+    }
+
+    &__info-timing-message__info-notification {
+        flex: none;
+        align-items: center;
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+
+    &__info-timing-message {
+    }
+
+    &__info-notification {
+        .watched {
+            font-size: 1rem;
+            font-weight: 200;
+        }
+    }
+}
