@@ -1,0 +1,83 @@
+.sidebar-left {
+    margin: 20px 2px;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 50px auto 100px;
+    justify-content: center;
+    padding: 0 8px;
+    &__top {
+        width: 50px;
+        height: 50px;
+        img {
+            padding: 4px;
+            border-radius: 50%;
+        }
+    }
+
+    &__center {
+    }
+
+    &__bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+
+        &__theme {
+            cursor: pointer;
+            border-radius: 8px;
+            border: 1px solid #717171;
+            &-light,
+            &-dark {
+                padding: 8px;
+                margin-bottom: 8px;
+            }
+
+            &-dark {
+                border: none;
+            }
+        }
+
+        .profile {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            position: relative;
+            padding: 1px;
+
+            & > img {
+                padding: 2px;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    .box-nodal__box {
+        font-weight: 500;
+        font-size: 1.6rem;
+        &.light {
+            background: inherit;
+        }
+        &.dark {
+            color: white;
+            background: #ccc;
+        }
+        
+        &__logout {
+            display: flex;
+            align-items: center;
+            text-shadow: 1px 1px 4px white;
+        }
+
+        button.box-nodal__box__logout{
+            height: 100%;
+            width: 100%;
+            padding: 12px;
+            color: inherit;
+            border: 1px solid var(--color-primary-background);
+            background-color: var(--color-primary-background);
+            transition: all 0.4s linear;
+        }
+    }
+}

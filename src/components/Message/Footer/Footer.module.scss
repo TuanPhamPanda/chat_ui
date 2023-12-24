@@ -1,3 +1,67 @@
 .footer {
-    border: 1px solid orange;
+    display: flex;
+    gap: 4px;
+
+    &__file,
+    &__sticker,
+    &__microphone,
+    &__input,
+    &__send-message {
+        height: 100%;
+        & i {
+            height: 100%;
+            cursor: pointer;
+            display: flex;
+            transition: all 0.5s linear;
+            align-items: center;
+        }
+    }
+
+    &__sticker,
+    &__microphone {
+        padding: 0 12px;
+    }
+
+    &__file {
+        & i {
+            padding: 0 12px;
+        }
+    }
+
+    &__input {
+        flex: 1;
+
+        input {
+            background: initial;
+            color: inherit;
+            width: 100%;
+            height: 100%;
+            border: none;
+            overflow: unset;
+            font-size: 1.6rem;
+
+            &:focus-visible,
+            &:focus {
+                border: unset;
+                outline: unset;
+            }
+        }
+    }
+
+    &__send-message {
+        & i {
+            padding-left: 16px;
+            padding-right: 16px;
+            background: var(--color-primary-background);
+            border: none;
+            color: white;
+            & > svg {
+                transform: rotate(-45deg);
+            }
+            &:hover {
+                color: black;
+                background-color: white;
+            }
+        }
+    }
 }

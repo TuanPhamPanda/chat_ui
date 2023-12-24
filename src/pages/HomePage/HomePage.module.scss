@@ -1,0 +1,17 @@
+.home-page {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 32% auto 25%;
+    border-radius: 10px;
+    
+    .btn {
+        display: inline-block;
+        outline: none;
+        border: 1px solid;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+}

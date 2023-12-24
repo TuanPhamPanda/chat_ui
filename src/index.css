@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;1,500;1,600&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,500;1,600&display=swap');
 :root {
     --color-primary-background: #fb632c;
     --color-primary-foreground: #000;
@@ -172,7 +171,7 @@ select {
     vertical-align: middle;
 }
 
-html{
+html {
     font-size: 62.5%;
     font-family: 'Nunito', sans-serif;
 }
@@ -226,4 +225,11 @@ img.avatar {
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--color-primary-background);
+}
+
+img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }
