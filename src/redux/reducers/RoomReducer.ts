@@ -2,7 +2,7 @@ import { Room } from '@/objects'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../stores'
 
-interface RoomReducerState {
+export interface RoomReducerState {
     rooms: Room[]
 }
 

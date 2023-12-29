@@ -1,4 +1,7 @@
 import classNames from 'classnames/bind'
+import { ChangeEvent, useCallback, useState } from 'react'
+import { Modal } from 'react-responsive-modal'
+import 'react-responsive-modal/styles.css'
 
 import icons from '@/utils/icons'
 import InformationStyle from './Information.module.scss'
@@ -7,27 +10,30 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux'
 const cx = classNames.bind(InformationStyle)
 
 export default function Information() {
-    //Header
-    //nút ẩn sidebar
-    //show more
-    //Change theme
-    //Profile info
-    //Avatar
-    //Name full
-    //Create room chat
     const dispatch = useAppDispatch()
     const themeSelector = useAppSelector((state) => state.theme)
     const userSelector = useAppSelector((state) => state.user)
+    const [open, setOpen] = useState(true)
+    const [roomName, setRoomName] = useState('')
 
     const { HiPlus } = icons
 
-    // const [theme, setTheme] = useState(false)
-    /*
-    //hover three dots:
-                <div className={cx('create-room')}>
-                <button>Create room</button>
-            </div>
-            */
+    const handleOpenModal = useCallback(() => {
+        setOpen(true)
+    }, [])
+
+    const handleCloseModal = useCallback(() => {
+        setOpen(false)
+        setRoomName('')
+    }, [])
+
+    const handleChangeInputRoomName = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+        setRoomName(event.target.value)
+    }, [])
+
+    const handleCreateRoom = useCallback(() => {
+        console.log(roomName)
+    }, [roomName])
 
     return (
         <header className={cx('information')}>
@@ -38,14 +44,30 @@ export default function Information() {
                 </div>
 
                 <div className={cx('icons')}>
-                    {/* <i className={cx('arrow-left')}>
-                        <FaArrowLeft size={30} />
-                    </i> */}
-                    <button className={`${cx('icons__add-room', themeSelector.theme)}`}>
+                    <button onClick={handleOpenModal} className={`${cx('icons__add-room', themeSelector.theme)}`}>
                         <HiPlus size={30} />
                     </button>
                 </div>
             </div>
+
+            <Modal center open={open} onClose={handleCloseModal}>
+                <div className={cx('__modal-create-room')}>
+                    <span className={cx('__modal-create-room__title')}>Create room</span>
+                    <div className={cx('__modal-create-room__input')}>
+                        <label htmlFor='room-name'>Room name: </label>
+                        <input
+                            value={roomName}
+                            onChange={handleChangeInputRoomName}
+                            id='room-name'
+                            type='text'
+                            placeholder='Enter room name...'
+                        />
+                    </div>
+                    <div className={cx('__modal-create-room__button')}>
+                        <button onClick={handleCreateRoom}>Create</button>
+                    </div>
+                </div>
+            </Modal>
         </header>
     )
 }

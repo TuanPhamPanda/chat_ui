@@ -1,15 +1,25 @@
 import { User } from '@/objects'
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../stores'
+import { apiVersion1 } from '@/apis'
 
 export interface UserReducerState {
     user: User | null
     users: User[]
+    loading: boolean
+    error: string | null
 }
 
 const userLocalStorageString = localStorage.getItem('user')
 
-const userLocalStorage = JSON.parse(userLocalStorageString || '')
+const userLocalStorage = userLocalStorageString ? JSON.parse(userLocalStorageString) : null
+
+const userApi = apiVersion1.userApi
+
+export const getAllUsersThunk = createAsyncThunk('user', async () => {
+    const response = await userApi.getAllUsers()
+    return response
+})
 
 const initialState: UserReducerState = {
     user: userLocalStorage
@@ -21,7 +31,9 @@ const initialState: UserReducerState = {
               userLocalStorage.given_name
           )
         : null,
-    users: []
+    users: [],
+    loading: false,
+    error: ''
 }
 
 const userSlice = createSlice({
@@ -42,6 +54,24 @@ const userSlice = createSlice({
         clearAllUsers: (state) => {
             state.users = []
         }
+    },
+    extraReducers(builder) {
+        builder
+            .addCase(getAllUsersThunk.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(getAllUsersThunk.fulfilled, (state, action: PayloadAction<{ users: User[] }>) => {
+                state.loading = false
+                state.error = null
+                const users = [...action.payload.users]
+                state.users = users
+            })
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            .addCase(getAllUsersThunk.rejected, (state, action: PayloadAction<any>) => {
+                state.error = action.payload
+                state.loading = false
+                state.users = []
+            })
     }
 })
 

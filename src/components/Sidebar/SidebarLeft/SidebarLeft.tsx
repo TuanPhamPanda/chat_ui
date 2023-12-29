@@ -39,8 +39,6 @@ export default function SidebarLeft() {
         dispatch(logout())
     }, [dispatch])
 
-    console.log(user?.$picture)
-
     return (
         <div className={cx('sidebar-left')}>
             <div className={cx('sidebar-left__top')}>{<img src={`${logo}`} alt='logo' />}</div>
@@ -57,7 +55,7 @@ export default function SidebarLeft() {
                         theme ? cx('sidebar-left__bottom__theme-light') : cx('sidebar-left__bottom__theme-dark')
                     )}
                 >
-                    <i onClick={handleChangeTheme}>{theme ? <MdDarkMode size={24} /> : <MdLightMode size={24} />}</i>
+                    <i onClick={handleChangeTheme}>{theme === "light" ? <MdDarkMode size={24} /> : <MdLightMode size={24} />}</i>
                 </div>
 
                 <div onClick={handleShowBoxModal} className={cx('profile')}>

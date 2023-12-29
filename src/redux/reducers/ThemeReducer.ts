@@ -1,14 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../stores'
 
-interface ThemeReducerState {
+export interface ThemeReducerState {
     theme: 'light' | 'dark'
 }
 
 const themeSystem = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 const themeData = localStorage.getItem('theme') === null ? themeSystem : localStorage.getItem('theme') === 'true'
-//true: dark
-//false: light
 
 if (themeData) {
     const allElement = document.querySelector('*')
@@ -68,5 +66,3 @@ export const { setThemeLight, setThemeDark } = themeSlice.actions
 export const selectTheme = (state: RootState) => state.theme
 
 export default themeSlice.reducer
-
-//succeed
