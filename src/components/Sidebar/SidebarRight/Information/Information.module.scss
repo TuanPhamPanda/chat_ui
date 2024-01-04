@@ -78,6 +78,7 @@ header.information {
     justify-content: center;
     background-color: #fff;
     color: #000;
+    transition: height 400ms linear;
 
     &__title {
         display: inline;
@@ -105,6 +106,12 @@ header.information {
             border: unset;
             font-weight: 400;
         }
+    }
+
+    &__error {
+        font-size: 1.3rem;
+        color: red;
+        padding: 0 12px;
     }
 
     &__button {

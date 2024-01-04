@@ -8,12 +8,15 @@ const instance = axios.create({
     }
 })
 
+// Sửa đổi cấu hình trị mặc định sau khi tạo ra instance
+// instance.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+
 axios.interceptors.response.use(
     (response) => {
         return response
     },
-    (error) => {
-        return Promise.reject(error)
+    (err) => {
+        return Promise.reject(err)
     }
 )
 

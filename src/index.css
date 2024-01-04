@@ -233,3 +233,13 @@ img {
     height: 100%;
     border-radius: 50%;
 }
+
+i:active,
+button:active {
+    opacity: 0.3 !important;
+    background: var(--color-primary-background) !important;
+}
+
+.Toastify{
+    font-size: 1.5rem;
+}

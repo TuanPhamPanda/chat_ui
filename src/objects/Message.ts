@@ -1,30 +1,67 @@
-class Message{
-    private id: string;
-    private contentMessage: string;
-    private updatedAt: string;
+import User from './User'
 
-    constructor(id: string, contentMessage: string, updatedAt: string) {
-        this.id = id;
-        this.contentMessage = contentMessage;
+class Message {
+    constructor(
+        private id: string,
+        private user: User,
+        private content: string,
+        private updatedAt: string,
+        private type: 'message' | 'file',
+        private idFile?: string
+    ) {
+        this.id = id
+        this.idFile = idFile
+        this.type = type
+        this.user = user
+        this.content = content
         this.updatedAt = updatedAt
     }
+
     public get $id(): string {
-        return this.id;
+        return this.id
     }
     public set $id(value: string) {
-        this.id = value;
+        this.id = value
     }
-    public get $contentMessage(): string {
-        return this.contentMessage;
+
+    public get $user(): User {
+        return this.user
     }
-    public set $contentMessage(value: string) {
-        this.contentMessage = value;
+
+    public set $user(value: User) {
+        this.user = value
     }
+
+    public get $content(): string {
+        return this.content
+    }
+
+    public set $content(value: string) {
+        this.content = value
+    }
+
     public get $updatedAt(): string {
-        return this.updatedAt;
+        return this.updatedAt
     }
+
     public set $updatedAt(value: string) {
-        this.updatedAt = value;
+        this.updatedAt = value
+    }
+
+    public get $type(): string {
+        return this.type
+    }
+
+    public set $type(value: 'message' | 'file') {
+        this.type = value
+    }
+
+    public get $idFile(): string | undefined {
+        return this.idFile
+    }
+
+    public set $idFile(value: string) {
+        this.idFile = value
     }
 }
 

@@ -1,3 +1,4 @@
+import { Room } from '@/objects'
 import MessageItemStyle from './MessageItem.module.scss'
 import classNames from 'classnames/bind'
 
@@ -7,7 +8,11 @@ import classNames from 'classnames/bind'
 
 const cx = classNames.bind(MessageItemStyle)
 
-export default function MessageItem() {
+interface IMessageItemProps {
+    room: Room
+}
+
+export default function MessageItem({ room }: IMessageItemProps) {
     return (
         <div className={cx('message-item')}>
             <div className={cx('message-item__avatar')}>

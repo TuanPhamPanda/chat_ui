@@ -2,15 +2,15 @@ class User {
     private id: string
     private name: string
     private picture: string
-    private family_name: string
-    private given_name: string
+    private familyName: string
+    private givenName: string
 
-    constructor(id: string, name: string, picture: string, family_name: string, given_name: string) {
+    constructor(id: string, name: string, picture: string, familyName: string, givenName: string) {
         this.id = id
         this.name = name
         this.picture = picture
-        this.family_name = family_name
-        this.given_name = given_name
+        this.familyName = familyName
+        this.givenName = givenName
     }
 
     public get $id(): string {
@@ -25,11 +25,11 @@ class User {
     }
 
     public get $given_name(): string {
-        return this.given_name
+        return this.givenName
     }
 
     public get $family_name(): string {
-        return this.family_name
+        return this.familyName
     }
 
     public set $id(value: string) {
@@ -45,11 +45,11 @@ class User {
     }
 
     public set $given_name(value: string) {
-        this.given_name = value
+        this.givenName = value
     }
 
     public set $family_name(value: string) {
-        this.family_name = value
+        this.familyName = value
     }
 }
 

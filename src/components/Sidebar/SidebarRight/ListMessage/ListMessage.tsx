@@ -3,6 +3,11 @@ import { Scrollbars } from 'react-custom-scrollbars-2'
 
 import ListMessageStyle from './ListMessage.module.scss'
 import MessageItem from './MessageItem'
+import { useEffect } from 'react'
+import { useAppSelector } from '@/hooks/redux'
+import { Room } from '@/objects'
+import RoomApi from '@/apis/v1/RoomApi'
+import { roomApi } from '@/apis/v1'
 // import { UIEventHandler, useCallback, useEffect, useState } from 'react'
 // import { LoremIpsum } from 'lorem-ipsum'
 
@@ -29,6 +34,19 @@ const cx = classNames.bind(ListMessageStyle)
 // }
 
 export default function ListMessage() {
+    const rooms = useAppSelector((state) => state.room.rooms)
+    const user = useAppSelector((state) => state.user.user)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (user) {
+                const room = await roomApi.getAllRoomByIdUser(user.$id)
+                console.log(room)
+            }
+        }
+        fetchData()
+    }, [user])
+
     /*
     const [offset] = useState(30)
     const [message, setMessage] = useState<Article[]>([])
@@ -91,6 +109,8 @@ export default function ListMessage() {
     )
 */
 
+    useEffect(() => {}, [])
+
     return (
         <Scrollbars
             // onScroll={handleScroll}
@@ -103,11 +123,9 @@ export default function ListMessage() {
             universal={true}
         >
             <div className={cx('list-message')}>
-                {Array(15)
-                    .fill(0)
-                    .map((_, index) => {
-                        return <MessageItem key={index} />
-                    })}
+                {rooms.map((room: Room, index) => {
+                    return <MessageItem room={room} key={index} />
+                })}
             </div>
         </Scrollbars>
     )

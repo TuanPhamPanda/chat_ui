@@ -5,17 +5,21 @@ import 'react-responsive-modal/styles.css'
 
 import icons from '@/utils/icons'
 import InformationStyle from './Information.module.scss'
-import { useAppDispatch, useAppSelector } from '@/hooks/redux'
+import { useAppSelector, useAppDispatch } from '@/hooks/redux'
+import { roomApi } from '@/apis/v1'
+import { Room } from '@/objects'
+import { addRoom } from '@/redux/reducers'
+import { AxiosError } from 'axios'
 
 const cx = classNames.bind(InformationStyle)
 
 export default function Information() {
     const dispatch = useAppDispatch()
     const themeSelector = useAppSelector((state) => state.theme)
-    const userSelector = useAppSelector((state) => state.user)
-    const [open, setOpen] = useState(true)
+    const user = useAppSelector((state) => state.user.user)
+    const [open, setOpen] = useState(false)
     const [roomName, setRoomName] = useState('')
-
+    const [error, setError] = useState<string | undefined>()
     const { HiPlus } = icons
 
     const handleOpenModal = useCallback(() => {
@@ -25,22 +29,42 @@ export default function Information() {
     const handleCloseModal = useCallback(() => {
         setOpen(false)
         setRoomName('')
+        setError('')
     }, [])
 
     const handleChangeInputRoomName = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         setRoomName(event.target.value)
     }, [])
 
-    const handleCreateRoom = useCallback(() => {
-        console.log(roomName)
-    }, [roomName])
+    const handleCreateRoom = useCallback(async () => {
+        const userId = user?.$id
+        if (userId) {
+            if (roomName) {
+                try {
+                    const { room } = (await roomApi.createRoom(roomName, userId)) as { room: Room; err: 0 | 1 }
+                    dispatch(addRoom({ room: room }))
+                    handleCloseModal()
+                } catch (err) {
+                    const { response } = err as AxiosError
+                    console.log(response)
+
+                    if (response?.status === 400) {
+                        const errorData = response?.data as { msg: string; err: 0 | 1 }
+                        setError(errorData.msg)
+                    }
+                }
+            } else {
+                setError('Room name cannot be left blank. Please enter a room name.')
+            }
+        }
+    }, [roomName, user, dispatch, handleCloseModal])
 
     return (
         <header className={cx('information')}>
             <div className={cx('info')}>
                 <div className={cx('profile')}>
                     <h4>Welcome,</h4>
-                    <span>{userSelector.user?.$name}</span>
+                    <span>{user?.$name}</span>
                 </div>
 
                 <div className={cx('icons')}>
@@ -51,7 +75,7 @@ export default function Information() {
             </div>
 
             <Modal center open={open} onClose={handleCloseModal}>
-                <div className={cx('__modal-create-room')}>
+                <div style={error ? { height: '260px' } : {}} className={cx('__modal-create-room')}>
                     <span className={cx('__modal-create-room__title')}>Create room</span>
                     <div className={cx('__modal-create-room__input')}>
                         <label htmlFor='room-name'>Room name: </label>
@@ -63,6 +87,11 @@ export default function Information() {
                             placeholder='Enter room name...'
                         />
                     </div>
+                    {error && (
+                        <div className={cx('__modal-create-room__error')}>
+                            <span>{error}</span>
+                        </div>
+                    )}
                     <div className={cx('__modal-create-room__button')}>
                         <button onClick={handleCreateRoom}>Create</button>
                     </div>

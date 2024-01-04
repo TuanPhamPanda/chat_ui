@@ -55,7 +55,9 @@ export default function SidebarLeft() {
                         theme ? cx('sidebar-left__bottom__theme-light') : cx('sidebar-left__bottom__theme-dark')
                     )}
                 >
-                    <i onClick={handleChangeTheme}>{theme === "light" ? <MdDarkMode size={24} /> : <MdLightMode size={24} />}</i>
+                    <i onClick={handleChangeTheme}>
+                        {theme === 'light' ? <MdDarkMode size={24} /> : <MdLightMode size={24} />}
+                    </i>
                 </div>
 
                 <div onClick={handleShowBoxModal} className={cx('profile')}>
@@ -63,13 +65,11 @@ export default function SidebarLeft() {
                     {isBoxModal ? (
                         <BoxModal top={-36} right={-108}>
                             <div className={cx('box-nodal__box', theme ? 'light' : 'dark')}>
-                                <button className={`${cx('box-nodal__box__logout')}`}>
+                                <button onClick={handleLogout} className={`${cx('box-nodal__box__logout')}`}>
                                     <i className='box-nodal__box__icon'>
                                         <CiLogout size={24} />
                                     </i>
-                                    <span onClick={handleLogout} className='box-nodal__box__title'>
-                                        Logout
-                                    </span>
+                                    <span className='box-nodal__box__title'>Logout</span>
                                 </button>
                             </div>
                         </BoxModal>
