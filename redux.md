@@ -1,0 +1,2 @@
+- name trong mỗi createSlice là mỗi tính năng
+- mỗi action viết code mutation (giống imitation trong redux core) vì redux toolkit đã cài IMMER(chuyển đổi imitation => mutation)

@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 
 import HomePageStyle from './HomePage.module.scss'
 import { ListUser, Message } from '@/components'
@@ -9,7 +9,7 @@ import { useAppSelector } from '@/hooks/redux'
 
 const cx = classNames.bind(HomePageStyle)
 
-export default function HomePage() {
+const HomePage = memo(() => {
     /*
     - chia 3 columns: 
     + messages list
@@ -38,4 +38,6 @@ export default function HomePage() {
             </div>
         </>
     )
-}
+})
+
+export default HomePage

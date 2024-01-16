@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind'
+import { memo } from 'react'
 
 import SidebarStyle from './Sidebar.module.scss'
 
@@ -7,11 +8,13 @@ import SidebarRight from './SidebarRight'
 
 const cx = classNames.bind(SidebarStyle)
 
-export default function Sidebar() {
+const Sidebar = memo(() => {
     return (
         <div className={cx('sidebar')}>
             <SidebarLeft />
             <SidebarRight />
         </div>
     )
-}
+})
+
+export default Sidebar

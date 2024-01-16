@@ -3,13 +3,13 @@ import { Scrollbars } from 'react-custom-scrollbars-2'
 
 import ListMessageStyle from './ListMessage.module.scss'
 import MessageItem from './MessageItem'
-import { useEffect } from 'react'
-import { useAppSelector } from '@/hooks/redux'
+import { memo, useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '@/hooks/redux'
 import { Room } from '@/objects'
-import RoomApi from '@/apis/v1/RoomApi'
 import { roomApi } from '@/apis/v1'
+import { getAllRoom } from '@/redux/reducers/RoomReducer'
+import { setRoomMessage } from '@/redux/reducers'
 // import { UIEventHandler, useCallback, useEffect, useState } from 'react'
-// import { LoremIpsum } from 'lorem-ipsum'
 
 const cx = classNames.bind(ListMessageStyle)
 
@@ -33,19 +33,20 @@ const cx = classNames.bind(ListMessageStyle)
 //     return article
 // }
 
-export default function ListMessage() {
+const ListMessage = memo(() => {
     const rooms = useAppSelector((state) => state.room.rooms)
     const user = useAppSelector((state) => state.user.user)
-
+    const dispatch = useAppDispatch()
     useEffect(() => {
         const fetchData = async () => {
             if (user) {
-                const room = await roomApi.getAllRoomByIdUser(user.$id)
-                console.log(room)
+                const { rooms } = (await roomApi.getAllRoomByIdUser(user.id)) as { err: 0 | 1; rooms: Room[] }
+                dispatch(getAllRoom({ rooms: rooms }))
+                dispatch(setRoomMessage({ room: rooms[0] }))
             }
         }
         fetchData()
-    }, [user])
+    }, [user, dispatch])
 
     /*
     const [offset] = useState(30)
@@ -109,8 +110,6 @@ export default function ListMessage() {
     )
 */
 
-    useEffect(() => {}, [])
-
     return (
         <Scrollbars
             // onScroll={handleScroll}
@@ -123,10 +122,12 @@ export default function ListMessage() {
             universal={true}
         >
             <div className={cx('list-message')}>
-                {rooms.map((room: Room, index) => {
-                    return <MessageItem room={room} key={index} />
+                {rooms.map((room: Room) => {
+                    return <MessageItem key={room.id} room={room} />
                 })}
             </div>
         </Scrollbars>
     )
-}
+})
+
+export default ListMessage

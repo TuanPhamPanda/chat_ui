@@ -1,5 +1,4 @@
-// import { GoogleOAuthProvider } from '@react-oauth/google'
-import { useCallback, useEffect } from 'react'
+import { memo, useCallback, useEffect } from 'react'
 import classNames from 'classnames/bind'
 
 import LoginPageStyle from './LoginPage.module.scss'
@@ -16,7 +15,7 @@ import { useAppSelector } from '@/hooks/redux'
 
 const cx = classNames.bind(LoginPageStyle)
 
-export default function Login() {
+const Login = memo(() => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const userState = useAppSelector((state) => state.user.user)
@@ -34,8 +33,8 @@ export default function Login() {
                         response.user.id,
                         response.user.name,
                         response.user.picture,
-                        response.user.family_name,
-                        response.user.given_name
+                        response.user.familyName,
+                        response.user.givenName
                     )
 
                     dispatch(login({ user: user }))
@@ -79,4 +78,6 @@ export default function Login() {
             </div>
         </div>
     )
-}
+})
+
+export default Login

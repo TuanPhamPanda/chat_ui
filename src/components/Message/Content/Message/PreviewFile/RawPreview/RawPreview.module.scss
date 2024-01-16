@@ -1,0 +1,55 @@
+.raw-preview {
+    height: 100px;
+    width: 240px;
+    display: grid;
+    grid-template-columns: 40% auto;
+    gap: 12px;
+
+    &__type-file {
+        position: relative;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 4px #000000;
+        border-top-right-radius: 24px;
+
+        &::before {
+            content: '';
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-top-right-radius: 24px;
+            opacity: 0.2;
+            background-color: white;
+        }
+    }
+
+    &__sql {
+        background-color: #31b7dc;
+    }
+    &__pptx {
+        background-color: #e6c573;
+    }
+    &__pdf {
+        background-color: #FF5F4C;
+    }
+    &__html{
+        background-color: #F37334;
+    }
+
+    &__wrapper {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+
+        &__icon-download {
+            cursor: pointer;
+            width: fit-content;
+            padding: 4px;
+        }
+    }
+}

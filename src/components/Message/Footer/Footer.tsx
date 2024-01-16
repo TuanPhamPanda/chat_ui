@@ -1,11 +1,11 @@
 import classNames from 'classnames/bind'
 import FooterStyle from './Footer.module.scss'
 import icons from '@/utils/icons'
-import { ChangeEvent, useCallback, useState } from 'react'
+import { ChangeEvent, memo, useCallback, useState } from 'react'
 
 const cx = classNames.bind(FooterStyle)
 
-export default function Footer() {
+const Footer = memo(() => {
     /*
         store redux:
             sticker: boolean
@@ -71,4 +71,6 @@ export default function Footer() {
             </div>
         </div>
     )
-}
+})
+
+export default Footer

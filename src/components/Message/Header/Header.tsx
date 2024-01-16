@@ -2,10 +2,11 @@ import classNames from 'classnames/bind'
 
 import HeaderStyle from './Header.module.scss'
 import icons from '@/utils/icons'
+import { memo } from 'react'
 
 const cx = classNames.bind(HeaderStyle)
 
-export default function Header() {
+const Header = memo(() => {
     //search
     //if(type phong=> )
     //image
@@ -23,10 +24,7 @@ export default function Header() {
         <div className={cx('header')}>
             <div className={cx('header__left')}>
                 <div className={cx('header__left__avatar')}>
-                    <img
-                        src='https://picsum.photos/200'
-                        alt='avatar'
-                    />
+                    <img src='https://picsum.photos/200' alt='avatar' />
                 </div>
                 <div>
                     <div className={cx('header__left__display-name')}>
@@ -39,18 +37,20 @@ export default function Header() {
             </div>
             <div className={cx('header__right')}>
                 <button className={cx("'header__right__voice-call'")}>
-                    <IoCall size={18}/>
+                    <IoCall size={18} />
                 </button>
                 <button className={cx('header__right__video-call')}>
-                    <IoVideocamSharp size={18}/>
+                    <IoVideocamSharp size={18} />
                 </button>
                 <button className={cx('header__right__search')}>
-                    <FaSearch size={18}/>
+                    <FaSearch size={18} />
                 </button>
                 <button className={cx('header__right__other')}>
-                    <HiDotsVertical size={18}/>
+                    <HiDotsVertical size={18} />
                 </button>
             </div>
         </div>
     )
-}
+})
+
+export default Header

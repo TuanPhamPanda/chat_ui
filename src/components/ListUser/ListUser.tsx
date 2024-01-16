@@ -1,18 +1,25 @@
+import { memo } from 'react'
+import classNames from 'classnames/bind'
 import ListUserStyle from './ListUser.module.scss'
-// import { useEffect } from 'react'
 // import { reduxHook } from '@/hooks'
 // import { getAllUsersThunk } from '@/redux/reducers'
 
 //const { useAppDispatch, useAppSelector } = reduxHook
 
-export default function ListUser() {
+const cx = classNames.bind(ListUserStyle)
+
+interface ListUserProps {}
+
+const ListUser: React.FC<ListUserProps> = memo(({}: ListUserProps) => {
     // const dispatch = useAppDispatch()
 
     // const users = useAppSelector((state) => state.user.users)
 
-    // useEffect(() => {        
+    // useEffect(() => {
     //     dispatch(getAllUsersThunk())
     // }, [dispatch])
 
-    return <div className={ListUserStyle['list-user']}>ListUser</div>
-}
+    return <div className={cx('list-user')}>ListUser</div>
+})
+
+export default ListUser

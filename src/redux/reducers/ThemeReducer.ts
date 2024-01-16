@@ -30,38 +30,37 @@ const initialState: ThemeReducerState = {
     theme: themeData ? 'dark' : 'light'
 }
 
+// toggleSlice
+/*
+    theme
+    
+*/
 const themeSlice = createSlice({
     name: 'theme',
     initialState,
     reducers: {
-        setThemeLight: (state) => {
-            state.theme = 'light'
-
-            localStorage.setItem('theme', JSON.stringify(false))
-
-            const allElement = document.querySelector('*')
-            if (allElement) {
-                if (allElement.classList.contains('dark')) {
-                    allElement.classList.remove('dark')
-                }
-                allElement.classList.add('light')
-            }
-        },
-        setThemeDark: (state) => {
-            state.theme = 'dark'
-            localStorage.setItem('theme', JSON.stringify(true))
-            const allElement = document.querySelector('*')
-            if (allElement) {
-                if (allElement.classList.contains('light')) {
-                    allElement.classList.remove('light')
-                }
-                allElement.classList.add('dark')
+        setTheme: (state) => {            
+            if (state.theme === 'light') {
+                state.theme = 'dark'
+            } else {
+                state.theme = 'light'
             }
         }
+        // setThemeDark: (state) => {
+        //     state.theme = 'dark'
+        //     localStorage.setItem('theme', JSON.stringify(true))
+        //     const allElement = document.querySelector('*')
+        //     if (allElement) {
+        //         if (allElement.classList.contains('light')) {
+        //             allElement.classList.remove('light')
+        //         }
+        //         allElement.classList.add('dark')
+        //     }
+        // }
     }
 })
 
-export const { setThemeLight, setThemeDark } = themeSlice.actions
+export const { setTheme } = themeSlice.actions
 
 export const selectTheme = (state: RootState) => state.theme
 

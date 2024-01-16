@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { messageReducer, roomReducer, themeReducer, userReducer } from '../reducers'
 
-export const store = configureStore({
+const store = configureStore({
     reducer: {
         message: messageReducer,
         room: roomReducer,

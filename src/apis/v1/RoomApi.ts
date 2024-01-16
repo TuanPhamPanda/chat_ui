@@ -2,10 +2,11 @@ import axios from '../axios'
 
 class RoomApi {
     private prefix: string = '/v1/room'
-    public async createRoom(roomName: string, userId: string) {
+    public async createRoom(roomName: string, userId: string, description: string){
         const response = await axios.post(`${this.prefix}/create-room`, {
             roomName,
-            userId
+            userId,
+            description
         })
         return response.data
     }

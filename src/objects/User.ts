@@ -1,55 +1,55 @@
 class User {
-    private id: string
-    private name: string
-    private picture: string
-    private familyName: string
-    private givenName: string
+    private _id: string
+    private _name: string
+    private _picture: string
+    private _familyName: string
+    private _givenName: string
 
     constructor(id: string, name: string, picture: string, familyName: string, givenName: string) {
-        this.id = id
-        this.name = name
-        this.picture = picture
-        this.familyName = familyName
-        this.givenName = givenName
+        this._id = id
+        this._name = name
+        this._picture = picture
+        this._familyName = familyName
+        this._givenName = givenName
     }
 
-    public get $id(): string {
-        return this.id
+    public get id(): string {
+        return this._id
     }
 
-    public get $name(): string {
-        return this.name
+    public get name(): string {
+        return this._name
     }
-    public get $picture(): string {
-        return this.picture
-    }
-
-    public get $given_name(): string {
-        return this.givenName
+    public get picture(): string {
+        return this._picture
     }
 
-    public get $family_name(): string {
-        return this.familyName
+    public get givenName(): string {
+        return this._givenName
     }
 
-    public set $id(value: string) {
-        this.id = value
+    public get familyName(): string {
+        return this._familyName
     }
 
-    public set $name(value: string) {
-        this.name = value
+    public set id(value: string) {
+        this._id = value
     }
 
-    public set $picture(value: string) {
-        this.picture = value
+    public set name(value: string) {
+        this._name = value
     }
 
-    public set $given_name(value: string) {
-        this.givenName = value
+    public set picture(value: string) {
+        this._picture = value
     }
 
-    public set $family_name(value: string) {
-        this.familyName = value
+    public set givenName(value: string) {
+        this._givenName = value
+    }
+
+    public set familyName(value: string) {
+        this._familyName = value
     }
 }
 

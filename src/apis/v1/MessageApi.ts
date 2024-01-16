@@ -38,6 +38,11 @@ class MessageApi {
         })
         return data
     }
+
+    public async getAllMessageByIdRoom(idRoom: string) {
+        const response = await axios.get(`${this.prefix}/${idRoom}`)
+        return response.data
+    }
 }
 
 export default new MessageApi()

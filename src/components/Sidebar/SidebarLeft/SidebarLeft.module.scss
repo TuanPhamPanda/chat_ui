@@ -31,10 +31,12 @@
             &-dark {
                 padding: 8px;
                 margin-bottom: 8px;
-            }
-
-            &-dark {
-                border: none;
+                &:active {
+                    opacity: 0.3;
+                }
+                & i:active {
+                    background: unset !important;
+                }
             }
         }
 
@@ -63,14 +65,14 @@
             color: white;
             background: #ccc;
         }
-        
+
         &__logout {
             display: flex;
             align-items: center;
             text-shadow: 1px 1px 4px white;
         }
 
-        button.box-nodal__box__logout{
+        button.box-nodal__box__logout {
             height: 100%;
             width: 100%;
             padding: 12px;

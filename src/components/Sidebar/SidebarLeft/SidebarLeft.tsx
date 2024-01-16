@@ -1,17 +1,17 @@
 import classNames from 'classnames/bind'
-import { MouseEvent, useCallback, useState } from 'react'
+import { MouseEvent, memo, useCallback, useState } from 'react'
 
 import SidebarLeftStyle from './SidebarLeft.module.scss'
 import logo from '@/assets/logo.png'
 import icons from '@/utils/icons'
 import { BoxModal } from '@/components'
 import { useAppSelector, useAppDispatch } from '@/hooks/redux'
-import { setThemeDark, setThemeLight } from '@/redux/reducers/ThemeReducer'
 import { logout } from '@/redux/reducers/UserReducer'
+import { setTheme } from '@/redux/reducers'
 
 const cx = classNames.bind(SidebarLeftStyle)
 
-export default function SidebarLeft() {
+const SidebarLeft = memo(() => {
     const [isBoxModal, setIsBoxModal] = useState(false)
 
     const { MdDarkMode, MdLightMode, CiLogout } = icons
@@ -21,10 +21,27 @@ export default function SidebarLeft() {
     const { user } = useAppSelector((state) => state.user)
 
     const handleChangeTheme = useCallback(() => {
+        dispatch(setTheme())
+
         if (theme === 'dark') {
-            dispatch(setThemeLight())
+            localStorage.setItem('theme', JSON.stringify(false))
+
+            const allElement = document.querySelector('*')
+            if (allElement) {
+                if (allElement.classList.contains('dark')) {
+                    allElement.classList.remove('dark')
+                }
+                allElement.classList.add('light')
+            }
         } else {
-            dispatch(setThemeDark())
+            localStorage.setItem('theme', JSON.stringify(true))
+            const allElement = document.querySelector('*')
+            if (allElement) {
+                if (allElement.classList.contains('light')) {
+                    allElement.classList.remove('light')
+                }
+                allElement.classList.add('dark')
+            }
         }
     }, [theme, dispatch])
 
@@ -50,18 +67,19 @@ export default function SidebarLeft() {
             <div className={cx('sidebar-left__bottom')}>
                 {/* Change theme */}
                 <div
+                    onClick={handleChangeTheme}
                     className={cx(
                         'sidebar-left__bottom__theme',
-                        theme ? cx('sidebar-left__bottom__theme-light') : cx('sidebar-left__bottom__theme-dark')
+                        theme === 'light'
+                            ? cx('sidebar-left__bottom__theme-light')
+                            : cx('sidebar-left__bottom__theme-dark')
                     )}
                 >
-                    <i onClick={handleChangeTheme}>
-                        {theme === 'light' ? <MdDarkMode size={24} /> : <MdLightMode size={24} />}
-                    </i>
+                    <i>{theme === 'light' ? <MdDarkMode size={24} /> : <MdLightMode size={24} />}</i>
                 </div>
 
                 <div onClick={handleShowBoxModal} className={cx('profile')}>
-                    <img className='avatar' src={`${user?.$picture}`} alt='' />
+                    <img className='avatar' src={`${user?.picture}`} alt='' />
                     {isBoxModal ? (
                         <BoxModal top={-36} right={-108}>
                             <div className={cx('box-nodal__box', theme ? 'light' : 'dark')}>
@@ -78,4 +96,6 @@ export default function SidebarLeft() {
             </div>
         </div>
     )
-}
+})
+
+export default SidebarLeft

@@ -236,8 +236,7 @@ img {
 
 i:active,
 button:active {
-    opacity: 0.3 !important;
-    background: var(--color-primary-background) !important;
+    opacity: 0.7 !important;
 }
 
 .Toastify{

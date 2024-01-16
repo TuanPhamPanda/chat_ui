@@ -1,0 +1,9 @@
+.file-preview {
+    &__image-preview {
+        width: 150px;
+        height: 150px;
+        img {
+            border-radius: unset;
+        }
+    }
+}

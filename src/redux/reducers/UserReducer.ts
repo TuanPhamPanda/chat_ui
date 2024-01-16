@@ -24,11 +24,11 @@ export const getAllUsersThunk = createAsyncThunk('user', async () => {
 const initialState: UserReducerState = {
     user: userLocalStorage
         ? new User(
-              userLocalStorage.id,
-              userLocalStorage.name,
-              userLocalStorage.picture,
-              userLocalStorage.family_name,
-              userLocalStorage.given_name
+              userLocalStorage._id,
+              userLocalStorage._name,
+              userLocalStorage._picture,
+              userLocalStorage._familyName,
+              userLocalStorage._givenName
           )
         : null,
     users: [],

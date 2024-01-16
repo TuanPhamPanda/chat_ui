@@ -1,7 +1,7 @@
 .message-item {
     display: flex;
-    gap: 4px;
-    max-height: 60px;
+    min-height: 60px;
+    align-items: center;
 
     &__avatar {
         width: 52px;
@@ -13,13 +13,29 @@
             width: 32px;
             height: 32px;
         }
+
+        &__list-avatar {
+            display: grid;
+            grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+            align-items: center;
+            justify-items: center;
+
+            & span {
+                font-size: 1.3rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                color: inherit;
+                height: 100%;
+            }
+        }
     }
 
     &__info-name__info-latest-message,
     &__info-timing-message__info-notification {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         gap: 8px;
         height: 52px;
     }
@@ -27,6 +43,7 @@
     &__info-name__info-latest-message {
         flex: 1;
         font-size: 1.4rem;
+        padding: 0 16px;
         cursor: pointer;
         .watched {
             font-size: 1.4rem;
@@ -37,6 +54,7 @@
     }
 
     &__info-latest-message {
+        font-size: 1.4rem;
     }
 
     &__info-timing-message__info-notification {
@@ -44,15 +62,14 @@
         align-items: center;
         font-size: 1.2rem;
         font-weight: 300;
+        justify-content: space-evenly;
     }
 
     &__info-timing-message {
     }
 
     &__info-notification {
-        .watched {
-            font-size: 1rem;
-            font-weight: 200;
-        }
+        width: 35px;
+        height: 52px;
     }
 }

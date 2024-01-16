@@ -1,7 +1,8 @@
 import classNames from 'classnames/bind'
-import { ChangeEvent, useCallback, useState } from 'react'
+import { ChangeEvent, memo, useCallback, useState } from 'react'
 import { Modal } from 'react-responsive-modal'
 import 'react-responsive-modal/styles.css'
+import { AxiosError } from 'axios'
 
 import icons from '@/utils/icons'
 import InformationStyle from './Information.module.scss'
@@ -9,16 +10,16 @@ import { useAppSelector, useAppDispatch } from '@/hooks/redux'
 import { roomApi } from '@/apis/v1'
 import { Room } from '@/objects'
 import { addRoom } from '@/redux/reducers'
-import { AxiosError } from 'axios'
 
 const cx = classNames.bind(InformationStyle)
 
-export default function Information() {
+const Information = memo(() => {
     const dispatch = useAppDispatch()
     const themeSelector = useAppSelector((state) => state.theme)
     const user = useAppSelector((state) => state.user.user)
     const [open, setOpen] = useState(false)
     const [roomName, setRoomName] = useState('')
+    const [description, setDescription] = useState('')
     const [error, setError] = useState<string | undefined>()
     const { HiPlus } = icons
 
@@ -36,35 +37,45 @@ export default function Information() {
         setRoomName(event.target.value)
     }, [])
 
+    const handleChangeInputDescription = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+        setDescription(event.target.value)
+    }, [])
+
     const handleCreateRoom = useCallback(async () => {
-        const userId = user?.$id
+        const userId = user?.id
         if (userId) {
-            if (roomName) {
+            if (!roomName) {
+                setError('Room name cannot be left blank. Please enter a room name.')
+                return
+            } else if (!description) {
+                setError('Description cannot be left blank. Please enter a description.')
+                return
+            } else {
                 try {
-                    const { room } = (await roomApi.createRoom(roomName, userId)) as { room: Room; err: 0 | 1 }
+                    const { room } = (await roomApi.createRoom(roomName, userId, description)) as {
+                        room: Room
+                        err: 0 | 1
+                    }
                     dispatch(addRoom({ room: room }))
                     handleCloseModal()
                 } catch (err) {
                     const { response } = err as AxiosError
-                    console.log(response)
 
                     if (response?.status === 400) {
                         const errorData = response?.data as { msg: string; err: 0 | 1 }
                         setError(errorData.msg)
                     }
                 }
-            } else {
-                setError('Room name cannot be left blank. Please enter a room name.')
             }
         }
-    }, [roomName, user, dispatch, handleCloseModal])
+    }, [roomName, user, description, dispatch, handleCloseModal])
 
     return (
         <header className={cx('information')}>
             <div className={cx('info')}>
                 <div className={cx('profile')}>
                     <h4>Welcome,</h4>
-                    <span>{user?.$name}</span>
+                    <span>{user?.name}</span>
                 </div>
 
                 <div className={cx('icons')}>
@@ -75,7 +86,7 @@ export default function Information() {
             </div>
 
             <Modal center open={open} onClose={handleCloseModal}>
-                <div style={error ? { height: '260px' } : {}} className={cx('__modal-create-room')}>
+                <div style={error ? { height: '320px' } : {}} className={cx('__modal-create-room')}>
                     <span className={cx('__modal-create-room__title')}>Create room</span>
                     <div className={cx('__modal-create-room__input')}>
                         <label htmlFor='room-name'>Room name: </label>
@@ -85,6 +96,16 @@ export default function Information() {
                             id='room-name'
                             type='text'
                             placeholder='Enter room name...'
+                        />
+                    </div>
+                    <div className={cx('__modal-create-room__input')}>
+                        <label htmlFor='room-name'>Description: </label>
+                        <input
+                            value={description}
+                            onChange={handleChangeInputDescription}
+                            id='room-name'
+                            type='text'
+                            placeholder='Enter description...'
                         />
                     </div>
                     {error && (
@@ -99,4 +120,6 @@ export default function Information() {
             </Modal>
         </header>
     )
-}
+})
+
+export default Information

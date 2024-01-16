@@ -1,12 +1,13 @@
 import classNames from 'classnames/bind'
 import { toast } from 'react-toastify'
+import { memo } from 'react'
 
 import SearchStyle from './Search.module.scss'
 import icons from '@/utils/icons'
 
 const cx = classNames.bind(SearchStyle)
 
-export default function Search() {
+const Search = memo(() => {
     const { FaSearch } = icons
 
     return (
@@ -17,4 +18,6 @@ export default function Search() {
             </button>
         </div>
     )
-}
+})
+
+export default Search
