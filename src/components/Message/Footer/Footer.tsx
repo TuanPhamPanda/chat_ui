@@ -2,6 +2,8 @@ import classNames from 'classnames/bind'
 import FooterStyle from './Footer.module.scss'
 import icons from '@/utils/icons'
 import { ChangeEvent, memo, useCallback, useState } from 'react'
+import { useAppDispatch } from '@/hooks/redux'
+import { toggleSticker } from '@/redux/reducers'
 
 const cx = classNames.bind(FooterStyle)
 
@@ -13,6 +15,7 @@ const Footer = memo(() => {
             online: boolean
     */
 
+    const dispatch = useAppDispatch()
     const { RiAttachment2, PiSmileySticker, FaMicrophone, IoSendSharp } = icons
     const [message, setMessage] = useState<File | string | undefined>()
 
@@ -37,6 +40,10 @@ const Footer = memo(() => {
         [message]
     )
 
+    const handleToggleSticker = useCallback(() => {
+        dispatch(toggleSticker())
+    }, [])
+
     return (
         <div className={cx('footer')}>
             <div className={cx('footer__file')}>
@@ -54,7 +61,7 @@ const Footer = memo(() => {
                     placeholder='Write message...'
                 />
             </div>
-            <div className={cx('footer__sticker')}>
+            <div className={cx('footer__sticker')} onClick={handleToggleSticker}>
                 <i>
                     <PiSmileySticker size={20} />
                 </i>

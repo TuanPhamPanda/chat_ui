@@ -1,16 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,500;1,600&display=swap');
+@import 'normalize.css';
+
 :root {
     --color-primary-background: #fb632c;
     --color-primary-foreground: #000;
     --color-primary-dark-foreground: #fff;
     --color-primary-dark-background: #333;
     --background-skeleton: #e7e7e7;
+    --height-header: 60px;
 }
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
 *::-webkit-scrollbar-track {
@@ -21,12 +25,21 @@
     background: inherit;
 }
 
-html,
+html {
+    font-size: 62.5%;
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    line-height: 1;
+    font-size: 1.6rem;
+}
+
 body,
-div,
-span,
-object,
-iframe,
+#root {
+    height: 100vh;
+}
+
 h1,
 h2,
 h3,
@@ -34,151 +47,8 @@ h4,
 h5,
 h6,
 p,
-blockquote,
-pre,
-abbr,
-address,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-samp,
-small,
-strong,
-sub,
-sup,
-var,
-b,
-i,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-    background: transparent;
-    user-select: none;
-}
-body {
-    line-height: 1;
-}
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-    display: block;
-}
-nav ul {
-    list-style: none;
-}
-blockquote,
-q {
-    quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-    content: none;
-}
-a {
-    margin: 0;
-    padding: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-    background: transparent;
-}
-ins {
-    background-color: #ff9;
-    color: #000;
-    text-decoration: none;
-}
-mark {
-    background-color: #ff9;
-    color: #000;
-    font-style: italic;
-    font-weight: bold;
-}
-del {
-    text-decoration: line-through;
-}
-abbr[title],
-dfn[title] {
-    border-bottom: 1px dotted;
-    cursor: help;
-}
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-}
-input,
-select {
-    vertical-align: middle;
-}
-
-html {
-    font-size: 62.5%;
-    font-family: 'Nunito', sans-serif;
-}
-
-body,
-#root {
-    height: 100vh;
+span {
+    font-size: inherit;
 }
 
 #root {
@@ -217,7 +87,8 @@ button {
     cursor: pointer;
 }
 
-.scrollbar > :last-child > :first-child {
+.scrollbar > :last-child > :first-child,
+.scrollbar > :nth-child(2) > :first-child {
     background-color: var(--color-primary-background) !important;
 }
 
@@ -237,8 +108,4 @@ img {
 i:active,
 button:active {
     opacity: 0.7 !important;
-}
-
-.Toastify{
-    font-size: 1.5rem;
 }

@@ -1,0 +1,117 @@
+.wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    &:last-child {
+        padding-bottom: 12px;
+    }
+    .header {
+        display: flex;
+        height: var(--height-header, 60px);
+        border-bottom: 1px solid var(--color-primary-background);
+        border-top: 1px solid var(--color-primary-background);
+        justify-content: center;
+        align-items: center;
+    }
+    .scrollbar {
+        height: calc(100vh - var(--height-header, 60px)) !important;
+        width: 100px;
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 12px;
+            height: calc(var(--height-header, 60px) * 3);
+            gap: 12px;
+
+            img {
+                height: 60px;
+                width: 60px;
+            }
+
+            & div {
+                margin-top: 8px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+
+                i {
+                    padding: 4px;
+                    border-radius: 50%;
+                    background: var(--color-primary-background);
+                    border: none;
+                    color: white;
+                    display: inline-block;
+                    cursor: pointer;
+                    transition: all 0.5s linear;
+                    &:hover {
+                        background-color: white;
+                        color: black;
+                    }
+                }
+            }
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            padding: 0 16px;
+
+            .members,
+            .images,
+            .videos,
+            .files,
+            .links,
+            .settings {
+                display: flex;
+                flex-direction: column;
+
+                & > span {
+                    margin: 12px 0;
+                }
+            }
+
+            .settings {
+                padding-bottom: 12px;
+            }
+
+            .videos {
+                video {
+                    width: 100%;
+                    height: 100%;
+                }
+                .scrollbar {
+                    height: calc(var(--height-header, 60px) * 2) !important;
+                    & :first-child {
+                        display: flex;
+                        gap: 12px;
+                    }
+                }
+            }
+
+            .images {
+                img {
+                    border-radius: 16px;
+                }
+
+                & div {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 12px;
+                }
+            }
+
+            .members {
+                div {
+                    & > span {
+                        font-size: inherit;
+                        margin-left: 12px;
+                    }
+                }
+            }
+        }
+    }
+}

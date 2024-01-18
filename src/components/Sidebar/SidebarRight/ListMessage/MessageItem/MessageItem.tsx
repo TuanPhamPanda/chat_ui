@@ -4,7 +4,7 @@ import classNames from 'classnames/bind'
 import { useAppSelector, useAppDispatch } from '@/hooks/redux'
 import { memo, useCallback, useState } from 'react'
 import icons from '@/utils/icons'
-import { setRoomMessage } from '@/redux/reducers'
+import { setRoomMessage, toggleProfile } from '@/redux/reducers'
 
 const cx = classNames.bind(MessageItemStyle)
 
@@ -16,7 +16,8 @@ const MessageItem = memo(({ room }: IMessageItemProps) => {
     const dispatch = useAppDispatch()
 
     const user = useAppSelector((state) => state.user.user)
-    const theme = useAppSelector((state) => state.theme.theme)
+    const theme = useAppSelector((state) => state.toggle.theme)
+    const informationProfile = useAppSelector((state) => state.toggle.informationProfile)
 
     const [isShowOption, setIsShowOption] = useState(false)
     const { SlOptions } = icons
@@ -30,7 +31,10 @@ const MessageItem = memo(({ room }: IMessageItemProps) => {
 
     const handleMessageItem = useCallback(() => {
         dispatch(setRoomMessage({ room }))
-    }, [room, dispatch])
+        if (informationProfile) {
+            dispatch(toggleProfile({ idRoom: room.id, isGroup: !!room.roomName }))
+        }
+    }, [room, dispatch, informationProfile])
 
     return (
         <div onClick={handleMessageItem} className={cx('message-item')}>
@@ -80,7 +84,7 @@ const MessageItem = memo(({ room }: IMessageItemProps) => {
 
             <div className={cx('message-item__info-name__info-latest-message')}>
                 <div className={cx('message-item__info-name')}>
-                    <h4>{room.users.length === 2 && !room.roomName ? room.messages[0].user.name : room.roomName}</h4>
+                    <h4>{room.users.length === 2 && !room.roomName ? room.messages[0]?.user.name : room.roomName}</h4>
                 </div>
                 <div className={cx('message-item__info-latest-message')}>
                     <h5>

@@ -1,6 +1,9 @@
 .footer {
     display: flex;
     gap: 4px;
+    border: 1px solid var(--color-primary-background);
+    border-bottom: unset;
+
 
     &__file,
     &__sticker,
@@ -8,9 +11,9 @@
     &__input,
     &__send-message {
         height: 100%;
+        cursor: pointer;
         & i {
             height: 100%;
-            cursor: pointer;
             display: flex;
             transition: all 0.5s linear;
             align-items: center;

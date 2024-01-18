@@ -11,12 +11,13 @@ interface BoxModalProps {
     right?: number
     left?: number
     bottom?: number
-    width?: number
+    width?: number | string
     height?: number
+    className?: string
 }
 
 const BoxModal: React.FC<BoxModalProps> = memo(
-    ({ children, bottom, left, right, top, width, height }: BoxModalProps) => {
+    ({ children, bottom, left, right, top, width, height, className }: BoxModalProps) => {
         return (
             <div
                 style={{
@@ -24,10 +25,10 @@ const BoxModal: React.FC<BoxModalProps> = memo(
                     right: `${right}px`,
                     left: `${left}px`,
                     bottom: `${bottom}px`,
-                    width: `${width}px`,
+                    width: typeof width === 'number' ? `${width}px` : `${width}`,
                     height: `${height}px`
                 }}
-                className={cx('box-modal')}
+                className={`${cx('box-modal')} ${className}`}
             >
                 {children}
             </div>

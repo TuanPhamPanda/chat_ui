@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import store from './redux/stores'
 
 /* css global */
-import './index.css'
+import './index.scss'
 
 /* toastify component & css */
 import { ToastContainer } from 'react-toastify'

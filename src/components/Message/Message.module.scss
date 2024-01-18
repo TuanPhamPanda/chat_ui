@@ -1,9 +1,15 @@
 .messages {
     display: grid;
-    grid-template-rows: 60px auto 100px 60px;
+    position: relative;
     font-size: 1.6rem;
-    & > div{
-        border: 1px solid orange;
-        border-radius: 12px;
+    grid-template-rows: 60px auto var(--height-header, 60px);
+
+    &.sticker {
+        grid-template-rows: 60px auto 100px 60px;
+    }
+
+    & > .wrapper {
+        transform: translateX(100%);
+        background-color: inherit;
     }
 }

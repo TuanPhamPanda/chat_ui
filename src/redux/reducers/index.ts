@@ -1,16 +1,9 @@
 export { default as messageReducer } from './MessageReducer'
 export { default as roomReducer } from './RoomReducer'
-export { default as themeReducer } from './ThemeReducer'
+export { default as toggleReducer } from './ToggleReducer'
 export { default as userReducer } from './UserReducer'
 
 export * from './RoomReducer'
-//toggle
-    //+ profile
-    //+ create room
-    //+ sidebar right
-    //+ list user
-    //+ sticker
-    //+ logout
 export * from './MessageReducer'
-export * from './ThemeReducer'
-export *  from './UserReducer'
+export * from './ToggleReducer'
+export * from './UserReducer'

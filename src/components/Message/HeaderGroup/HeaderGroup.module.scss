@@ -1,8 +1,9 @@
 .header {
-    border-radius: 12px;
     width: 100%;
     display: flex;
     justify-content: space-between;
+    border: 1px solid var(--color-primary-background);
+
     img {
         max-width: 36px;
         max-height: 36px;
@@ -44,6 +45,23 @@
             }
         }
 
+        &__other {
+            cursor: pointer;
+            padding: 8px 12px;
+            background-color: var(--color-primary-background);
+            outline: invert;
+            border-radius: 8px;
+            border: none;
+            color: white;
+            font-size: 1.4rem;
+            transition: all 0.3s linear;
+
+            &:hover {
+                background: white;
+                color: black;
+            }
+        }
+
         &__users-in-room {
             display: flex;
             align-items: center;
@@ -55,10 +73,10 @@
                 display: flex;
                 align-items: center;
                 & > :nth-child(2) {
-                    transform: translateX(-50%);
+                    transform: translateX(-40%);
                 }
                 & > :nth-child(3) {
-                    transform: translateX(-100%);
+                    transform: translateX(-80%);
                 }
             }
             &__length-avatar {

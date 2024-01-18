@@ -8,35 +8,45 @@ import Sticker from './Sticker'
 import Footer from './Footer'
 import { useAppSelector } from '@/hooks/redux'
 import HeaderGroup from './HeaderGroup'
+import InformationProfile from '../InfomationProfile/InformationProfile'
+import { BoxModal } from '..'
 // import { Room, User } from '@/objects'
 
 const cx = classNames.bind(MessagesStyle)
 
 const Messages = memo(() => {
-    const messageData = useAppSelector((state) => state.message.room)
+    const roomData = useAppSelector((state) => state.message.room)
+    const { informationProfile } = useAppSelector((state) => state.toggle)
+    const isSticker = useAppSelector((state) => state.toggle.sticker)
 
-    return !messageData ? (
-        <div>
-            {/* 
-                Khung hiển thị mặc định
-            */}
-        </div>
-    ) : (
-        <div className={cx('messages')}>
-            {messageData.roomName ? (
+    return (
+        <div className={cx('messages', isSticker ? 'sticker' : '')}>
+            {roomData?.roomName ? (
                 <HeaderGroup
-                    avatarGroup={messageData.groupAvatar}
-                    description={messageData.description}
-                    roomName={messageData.roomName}
-                    users={messageData.users}
+                    roomId={roomData?.id}
+                    avatarGroup={roomData?.groupAvatar}
+                    description={roomData?.description}
+                    roomName={roomData?.roomName}
+                    users={roomData?.users}
                 />
             ) : (
-                <Header />
+                <Header roomId={roomData?.id} />
             )}
 
             <Content />
-            <Sticker />
+            {isSticker && <Sticker />}
             <Footer />
+
+            {informationProfile && (
+                <BoxModal
+                    className={cx('wrapper')}
+                    bottom={0}
+                    right={0}
+                    top={0}
+                    width={'calc(100vw / 4)'}
+                    children={<InformationProfile />}
+                />
+            )}
         </div>
     )
 })

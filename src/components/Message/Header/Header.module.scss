@@ -3,7 +3,6 @@
     justify-content: space-between;
     align-items: center;
     align-items: center;
-    border-radius: 8px;
     border: 1px solid var(--color-primary-background);
     padding: 0 24px;
 
@@ -13,7 +12,7 @@
         &__avatar {
             height: 30px;
             width: 30px;
-            font-size: .7rem;
+            font-size: 0.7rem;
         }
         &:last-child {
             display: flex;

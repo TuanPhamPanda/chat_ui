@@ -17,7 +17,7 @@ const SidebarLeft = memo(() => {
     const { MdDarkMode, MdLightMode, CiLogout } = icons
     const dispatch = useAppDispatch()
 
-    const { theme } = useAppSelector((state) => state.theme)
+    const { theme } = useAppSelector((state) => state.toggle)
     const { user } = useAppSelector((state) => state.user)
 
     const handleChangeTheme = useCallback(() => {
@@ -81,7 +81,7 @@ const SidebarLeft = memo(() => {
                 <div onClick={handleShowBoxModal} className={cx('profile')}>
                     <img className='avatar' src={`${user?.picture}`} alt='' />
                     {isBoxModal ? (
-                        <BoxModal top={-36} right={-108}>
+                        <BoxModal top={-36} right={-94}>
                             <div className={cx('box-nodal__box', theme ? 'light' : 'dark')}>
                                 <button onClick={handleLogout} className={`${cx('box-nodal__box__logout')}`}>
                                     <i className='box-nodal__box__icon'>

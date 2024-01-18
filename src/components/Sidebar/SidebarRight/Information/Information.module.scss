@@ -1,12 +1,12 @@
 header.information {
     display: flex;
     gap: 8px;
+    height: var(--height-header, 60px);
     flex-direction: column;
 
     .info {
         display: flex;
         padding-top: 12px;
-        padding-bottom: 12px;
         align-items: center;
         justify-content: space-evenly;
     }

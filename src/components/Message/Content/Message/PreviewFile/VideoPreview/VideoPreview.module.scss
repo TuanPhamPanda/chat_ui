@@ -39,6 +39,7 @@
             width: 100%;
             border: 2px solid black;
             div {
+                transition: width .3s linear;
                 border: 2px solid var(--color-primary-background);
             }
         }

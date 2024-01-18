@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { messageReducer, roomReducer, themeReducer, userReducer } from '../reducers'
+import { messageReducer, roomReducer, toggleReducer, userReducer } from '../reducers'
 
 const store = configureStore({
     reducer: {
         message: messageReducer,
         room: roomReducer,
         user: userReducer,
-        theme: themeReducer
+        toggle: toggleReducer
     },
     middleware: (getDefaultMiddleware) => {
         const customizedMiddleware = getDefaultMiddleware({

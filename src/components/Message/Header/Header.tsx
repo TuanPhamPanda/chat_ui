@@ -3,10 +3,16 @@ import classNames from 'classnames/bind'
 import HeaderStyle from './Header.module.scss'
 import icons from '@/utils/icons'
 import { memo } from 'react'
+import { useAppDispatch, useAppSelector } from '@/hooks/redux'
+import { toggleProfile } from '@/redux/reducers'
 
 const cx = classNames.bind(HeaderStyle)
 
-const Header = memo(() => {
+interface HeaderProps {
+    roomId?: string
+}
+
+const Header = memo(({ roomId }: HeaderProps) => {
     //search
     //if(type phong=> )
     //image
@@ -19,6 +25,8 @@ const Header = memo(() => {
     //profile user
 
     const { IoCall, IoVideocamSharp, FaSearch, HiDotsVertical } = icons
+    const { informationProfile } = useAppSelector((state) => state.toggle)
+    const dispatch = useAppDispatch()
 
     return (
         <div className={cx('header')}>
@@ -45,7 +53,17 @@ const Header = memo(() => {
                 <button className={cx('header__right__search')}>
                     <FaSearch size={18} />
                 </button>
-                <button className={cx('header__right__other')}>
+                <button
+                    onClick={() => {
+                        if (!informationProfile) {
+                            const informationData = { idRoom: roomId!, isGroup: false }
+                            dispatch(toggleProfile(informationData))
+                            return
+                        }
+                        dispatch(toggleProfile(null))
+                    }}
+                    className={cx('header__right__other')}
+                >
                     <HiDotsVertical size={18} />
                 </button>
             </div>

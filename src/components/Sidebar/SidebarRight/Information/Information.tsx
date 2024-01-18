@@ -15,7 +15,7 @@ const cx = classNames.bind(InformationStyle)
 
 const Information = memo(() => {
     const dispatch = useAppDispatch()
-    const themeSelector = useAppSelector((state) => state.theme)
+    const themeSelector = useAppSelector((state) => state.toggle)
     const user = useAppSelector((state) => state.user.user)
     const [open, setOpen] = useState(false)
     const [roomName, setRoomName] = useState('')

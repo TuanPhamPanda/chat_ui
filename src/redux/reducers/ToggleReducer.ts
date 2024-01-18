@@ -1,9 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../stores'
 
-export interface ThemeReducerState {
-    theme: 'light' | 'dark'
+interface InformationProfileState {
+    idRoom: string
+    isGroup: boolean
 }
+
+export interface ToggleReducerState {
+    theme: 'light' | 'dark'
+    sticker: boolean
+    informationProfile: InformationProfileState | null
+}
+
+//toggle
+//+ profile
+//+ sidebar right
+//+ list user
+//micro
 
 const themeSystem = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 const themeData = localStorage.getItem('theme') === null ? themeSystem : localStorage.getItem('theme') === 'true'
@@ -26,26 +39,34 @@ if (themeData) {
     }
 }
 
-const initialState: ThemeReducerState = {
-    theme: themeData ? 'dark' : 'light'
+const initialState: ToggleReducerState = {
+    theme: themeData ? 'dark' : 'light',
+    sticker: false,
+    informationProfile: null
 }
 
 // toggleSlice
 /*
     theme
-    
 */
-const themeSlice = createSlice({
-    name: 'theme',
+const toggleSlice = createSlice({
+    name: 'toggle',
     initialState,
     reducers: {
-        setTheme: (state) => {            
+        setTheme: (state) => {
             if (state.theme === 'light') {
                 state.theme = 'dark'
             } else {
                 state.theme = 'light'
             }
+        },
+        toggleSticker: (state) => {
+            state.sticker = !state.sticker
+        },
+        toggleProfile: (state, action: PayloadAction<InformationProfileState | null>) => {
+            state.informationProfile = action.payload
         }
+
         // setThemeDark: (state) => {
         //     state.theme = 'dark'
         //     localStorage.setItem('theme', JSON.stringify(true))
@@ -60,8 +81,8 @@ const themeSlice = createSlice({
     }
 })
 
-export const { setTheme } = themeSlice.actions
+export const { setTheme, toggleSticker, toggleProfile } = toggleSlice.actions
 
-export const selectTheme = (state: RootState) => state.theme
+export const selectToggle = (state: RootState) => state.toggle
 
-export default themeSlice.reducer
+export default toggleSlice.reducer

@@ -4,6 +4,7 @@
     grid-template-columns: auto;
     grid-template-rows: 50px auto 100px;
     justify-content: center;
+
     padding: 0 8px;
     &__top {
         width: 50px;
@@ -59,7 +60,7 @@
         font-weight: 500;
         font-size: 1.6rem;
         &.light {
-            background: inherit;
+            color: white;
         }
         &.dark {
             color: white;
@@ -69,13 +70,14 @@
         &__logout {
             display: flex;
             align-items: center;
-            text-shadow: 1px 1px 4px white;
+            text-shadow: 1px 1px 2px white;
         }
 
         button.box-nodal__box__logout {
             height: 100%;
             width: 100%;
             padding: 12px;
+            gap: 4px;
             color: inherit;
             border: 1px solid var(--color-primary-background);
             background-color: var(--color-primary-background);

@@ -22,6 +22,8 @@ const HomePage = memo(() => {
     const user = useAppSelector((state) => state.user.user)
     const navigate = useNavigate()
 
+    const toggle = useAppSelector((state) => state.toggle)
+
     useEffect(() => {
         const userLocalStorageString = localStorage.getItem('user')
         if (!userLocalStorageString) {
@@ -34,7 +36,7 @@ const HomePage = memo(() => {
             <div className={cx('home-page')}>
                 <Sidebar />
                 <Message />
-                <ListUser />
+                {!toggle.informationProfile && <ListUser />}
             </div>
         </>
     )
